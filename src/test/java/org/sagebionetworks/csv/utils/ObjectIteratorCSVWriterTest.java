@@ -3,6 +3,7 @@ package org.sagebionetworks.csv.utils;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +35,9 @@ public class ObjectIteratorCSVWriterTest {
 		File file = null;
 		ObjectCSVReader<ExampleObject> reader = null;
 		try {
-			file = ObjectIteratorCSVWriter.write(mockIterator, fileName, headers, ExampleObject.class);
+			file = File.createTempFile(fileName, ".csv");
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectIteratorCSVWriter.write(mockIterator, fos, headers, ExampleObject.class);
 			reader = new ObjectCSVReader<ExampleObject>(new FileReader(file), ExampleObject.class, headers);
 			List<ExampleObject> actual = new ArrayList<ExampleObject>();
 			ExampleObject record = null;
