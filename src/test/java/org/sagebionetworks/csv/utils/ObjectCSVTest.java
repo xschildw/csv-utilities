@@ -34,7 +34,7 @@ public class ObjectCSVTest {
 		for(int i=0; i<count; i++){
 			ExampleObject ob = new ExampleObject();
 			ob.setaBoolean(i%2 == 0);
-			ob.setaString("Value,"+i);
+			ob.setaString("Value, \"with quote\""+i);
 			ob.setaLong(new Long(11*i));
 			ob.setaDouble(12312312.34234/i);
 			ob.setAnInteger(new Integer(i));
@@ -97,6 +97,8 @@ public class ObjectCSVTest {
 		csvReader.close();
 		// The results should match the original
 		assertEquals(data, results);
+		System.out.println(data.toString());
+		System.out.println(results.toString());
 	}
 	
 	@Test
@@ -145,7 +147,8 @@ public class ObjectCSVTest {
 		}
 		csv.close();
 		String stringCSV = writer.toString();
-//		System.out.println(stringCSV);
+		System.out.println(stringCSV);
+		System.out.println("start reading ...");
 		// Now make sure we can read the data into our new object
 		List<ExampleObject> results = new LinkedList<ExampleObject>();
 		StringReader reader = new StringReader(stringCSV);
