@@ -7,6 +7,8 @@ import java.lang.reflect.Modifier;
 import java.util.LinkedList;
 import java.util.List;
 
+import au.com.bytecode.opencsv.CSVWriter;
+
 /**
  * Write an objects to a CSV stream where each Object represents a row. The
  * first row of the resulting CSV will be a header that maps field names to each
