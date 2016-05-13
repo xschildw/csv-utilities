@@ -10,6 +10,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.CSVWriter;
+
 public class CSVReaderWriterTest {
 
 	@Test
@@ -257,7 +260,7 @@ public class CSVReaderWriterTest {
 		StringWriter sw = new StringWriter();
 		CSVWriter writer = new CSVWriter(sw);
 		writer.writeNext(new String[]{"has \"quote\""});
-		assertEquals("\"has \\\"quote\\\"\"\n", sw.toString());
+		assertEquals("\"has \"\"quote\"\"\"\n", sw.toString());
 		sw.close();
 		writer.close();
 	}
@@ -364,5 +367,53 @@ public class CSVReaderWriterTest {
 		assertEquals(list.get(0), back.get(0));
 		assertEquals(list.get(1), back.get(1));
 		assertEquals(list.get(4), back.get(2));
+	}
+
+	@Test
+	public void testOldData() throws IOException {
+		String oldData = "\"1462840117000\",\"userprofile\",\"{\"\"position\"\":\"\"\"\",\"\"lastName\"\":\"\"Geissler\"\",\"\"etag\"\":\"\"3a0bc974-344e-4efd-85a6-c945ecafcdd5\"\",\"\"location\"\":\"\"Tacoma, WA\"\",\"\"ownerId\"\":\"\"3340403\"\",\"\"emails\"\":[\"\"axolotl2@uw.edu\"\"],\"\"url\"\":\"\"\"\",\"\"openIds\"\":[],\"\"notificationSettings\"\":{\"\"sendEmailNotifications\"\":true},\"\"company\"\":\"\"University of Washington\"\",\"\"userName\"\":\"\"egeissler\"\",\"\"displayName\"\":\"\"Emma Geissler\"\",\"\"industry\"\":\"\"\"\",\"\"firstName\"\":\"\"Emma\"\"}\"";
+		CSVReader reader = new CSVReader(new StringReader(oldData));
+		List<String[]> toWrite = reader.readAll();
+		reader.close();
+		StringWriter sw = new StringWriter();
+		CSVWriter writer = new CSVWriter(sw);
+		writer.writeAll(toWrite);
+		String toRead = sw.toString();
+		sw.close();
+		writer.close();
+		reader = new CSVReader(new StringReader(toRead));
+		List<String[]> back = reader.readAll();
+		reader.close();
+		sw = new StringWriter();
+		writer = new CSVWriter(sw);
+		writer.writeAll(back);
+		String second = sw.toString();
+		sw.close();
+		writer.close();
+		assertEquals(toRead, second);
+	}
+
+	@Test
+	public void testNewData() throws IOException {
+		String newData = "\"1446751166000\",\"userprofile\",\"{\\\"openIds\\\":[],\\\"lastName\\\":\\\"Admin\\\",\\\"notificationSettings\\\":{\\\"sendEmailNotifications\\\":true},\\\"etag\\\":\\\"44a8adc7-75fc-492c-9c7f-d6a487097420\\\",\\\"ownerId\\\":\\\"1\\\",\\\"userName\\\":\\\"migrationAdmin\\\",\\\"emails\\\":[\\\"migrationAdmin@sagebase.org\\\"],\\\"firstName\\\":\\\"Migration\\\"}\"";
+		CSVReader reader = new CSVReader(new StringReader(newData));
+		List<String[]> toWrite = reader.readAll();
+		reader.close();
+		StringWriter sw = new StringWriter();
+		CSVWriter writer = new CSVWriter(sw);
+		writer.writeAll(toWrite);
+		String toRead = sw.toString();
+		sw.close();
+		writer.close();
+		reader = new CSVReader(new StringReader(toRead));
+		List<String[]> back = reader.readAll();
+		reader.close();
+		sw = new StringWriter();
+		writer = new CSVWriter(sw);
+		writer.writeAll(back);
+		String second = sw.toString();
+		sw.close();
+		writer.close();
+		assertEquals(toRead, second);
 	}
 }
