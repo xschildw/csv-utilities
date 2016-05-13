@@ -327,4 +327,32 @@ public class CSVParser {
         }
         return result;
     }
+
+	public String getPending() {
+		return pending;
+	}
+
+	public void setPending(String pending) {
+		this.pending = pending;
+	}
+
+	public char getSeparator() {
+		return separator;
+	}
+
+	public char getQuotechar() {
+		return quotechar;
+	}
+
+	public char getEscape() {
+		return escape;
+	}
+
+	public boolean isStrictQuotes() {
+		return strictQuotes;
+	}
+
+	public boolean isIgnoreLeadingWhiteSpace() {
+		return ignoreLeadingWhiteSpace;
+	}
 }

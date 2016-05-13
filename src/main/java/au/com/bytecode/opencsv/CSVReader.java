@@ -299,4 +299,20 @@ public class CSVReader implements Closeable {
 			throw new CSVRuntimeException(e);
 		}
 	}
+
+	public char getSeparator() {
+		return parser.getSeparator();
+	}
+
+	public char getEscape() {
+		return parser.getEscape();
+	}
+
+	public char getQuoteChar() {
+		return parser.getQuotechar();
+	}
+
+	public int getSkipLines() {
+		return skipLines;
+	}
 }
