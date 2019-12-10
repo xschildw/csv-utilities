@@ -1,6 +1,9 @@
 package org.sagebionetworks.csv.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -10,8 +13,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import au.com.bytecode.opencsv.CSVParser;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
+import au.com.bytecode.opencsv.Constants;
 
 public class CSVReaderWriterTest {
 
@@ -416,4 +421,62 @@ public class CSVReaderWriterTest {
 		writer.close();
 		assertEquals(toRead, second);
 	}
+	
+    /**
+     * See PLFM-5989
+     * @throws IOException 
+     */
+    @Test
+    public void testReadUTF_8BOMIgnore() throws IOException {
+        StringBuilder sb = new StringBuilder(CSVParser.INITIAL_READ_SIZE);
+        // Start the string with the UTF-8 byte order marker
+        sb.append(Constants.UTF_8_BYTE_ORDER_MARKER);
+        sb.append("a,b");
+
+        CSVReader c = new CSVReader(new StringReader(sb.toString()));
+
+        String[] nextLine = c.readNext();
+        // the parser should ignore the marker
+        assertEquals("a", nextLine[0]);
+        assertEquals("b", nextLine[1]);
+        c.close();
+    }
+    
+    /**
+     * See PLFM-5989
+     * @throws IOException 
+     */
+    @Test
+    public void testReadUTF_8BOMIgnoreQuotes() throws IOException {
+        StringBuilder sb = new StringBuilder(CSVParser.INITIAL_READ_SIZE);
+        // Start the string with the UTF-8 byte order marker
+        sb.append(Constants.UTF_8_BYTE_ORDER_MARKER);
+        sb.append("\"a\",\"b\"");
+
+        CSVReader c = new CSVReader(new StringReader(sb.toString()));
+
+        String[] nextLine = c.readNext();
+        // the parser should ignore the marker
+        assertEquals("a", nextLine[0]);
+        assertEquals("b", nextLine[1]);
+        c.close();
+    }
+    
+    /**
+     * See PLFM-5989
+     * @throws IOException 
+     */
+    @Test
+    public void testReadUTF_8BOMIgnoreOnly() throws IOException {
+        StringBuilder sb = new StringBuilder(CSVParser.INITIAL_READ_SIZE);
+        // Start the string with the UTF-8 byte order marker
+        sb.append(Constants.UTF_8_BYTE_ORDER_MARKER);
+
+        CSVReader c = new CSVReader(new StringReader(sb.toString()));
+
+        String[] nextLine = c.readNext();
+        // the parser should ignore the marker
+        assertEquals(null, nextLine[0]);
+        c.close();
+    }
 }

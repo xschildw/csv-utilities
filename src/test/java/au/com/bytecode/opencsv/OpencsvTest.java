@@ -1,5 +1,12 @@
 package au.com.bytecode.opencsv;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  Copyright 2005 Bytecode Pty Ltd.
 
@@ -18,13 +25,6 @@ package au.com.bytecode.opencsv;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import static org.junit.Assert.assertTrue;
 
 public class OpencsvTest {
 

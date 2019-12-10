@@ -15,8 +15,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.sagebionetworks.csv.utils.ExampleObject.SomeEnum;
-import org.sagebionetworks.csv.utils.ObjectCSVReader;
-import org.sagebionetworks.csv.utils.ObjectCSVWriter;
 
 /**
  * Tests for both ObjectCSVReader and the ObjectCSVWriter.
