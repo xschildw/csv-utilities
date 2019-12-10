@@ -1,5 +1,7 @@
 package au.com.bytecode.opencsv;
 
+import java.nio.charset.StandardCharsets;
+
 public class Constants {
 	/**
      * The default separator to use if none is supplied to the constructor.
@@ -35,5 +37,13 @@ public class Constants {
     
     /** Default line terminator uses platform encoding. */
     public static final String DEFAULT_LINE_END = "\n";
+    
+    /**
+     * Excel's CSV export function can start a file with the UTF-8 BOM (byte order marker) which is a non-ASCII character
+     * used to indicate the file's encoding is UTF-8.  See: https://en.wikipedia.org/wiki/Byte_order_mark
+     * 
+     */
+	public static final String UTF_8_BYTE_ORDER_MARKER = new String(new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF },
+			StandardCharsets.UTF_8);
     
 }

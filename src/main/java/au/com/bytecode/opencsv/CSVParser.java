@@ -162,7 +162,7 @@ public class CSVParser {
      * @throws IOException if bad things happen during the read
      */
     private String[] parseLine(String nextLine, boolean multi) throws IOException {
-
+    	
     	boolean inField = false; // It is in a column field without quote or with quote
     	
         if (!multi && pending != null) {
@@ -189,10 +189,17 @@ public class CSVParser {
             inQuotes = true;
             isNull = false;
         }
+        /*
+         * If a line starts with the UTF-8 BOM, the marker must be completely ignored.
+         */
+        if(nextLine.startsWith(Constants.UTF_8_BYTE_ORDER_MARKER)) {
+        	nextLine = nextLine.substring(1, nextLine.length());
+        }
 
         for (int i = 0; i < nextLine.length(); i++) {
 
             char c = nextLine.charAt(i);
+            
             if ( this.escape != Constants.NO_ESCAPE_CHARACTER && c == this.escape) {
                 if (isNextCharacterEscapable(nextLine, inQuotes || inField, i)) {
                     sb.append(nextLine.charAt(i + 1));
