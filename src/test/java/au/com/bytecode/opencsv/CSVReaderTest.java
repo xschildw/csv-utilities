@@ -1,5 +1,12 @@
 package au.com.bytecode.opencsv;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+import java.io.StringReader;
+
 /**
  Copyright 2005 Bytecode Pty Ltd.
 
@@ -18,13 +25,6 @@ package au.com.bytecode.opencsv;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 public class CSVReaderTest {
 

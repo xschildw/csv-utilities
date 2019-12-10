@@ -1,5 +1,21 @@
 package au.com.bytecode.opencsv;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  Copyright 2005 Bytecode Pty Ltd.
 
@@ -17,13 +33,6 @@ package au.com.bytecode.opencsv;
  */
 
 import org.junit.Test;
-
-import java.io.*;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class CSVWriterTest {
 

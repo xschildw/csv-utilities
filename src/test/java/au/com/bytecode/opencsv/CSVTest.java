@@ -1,10 +1,13 @@
 package au.com.bytecode.opencsv;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.io.StringReader;
 import java.io.StringWriter;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class CSVTest {
     
