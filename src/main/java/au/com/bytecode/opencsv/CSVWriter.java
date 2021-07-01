@@ -276,4 +276,61 @@ public class CSVWriter implements Closeable {
 	public void write(CSVWriteProc proc) {
 		proc.process(this);
 	}
+
+	/**
+	 * @return the separator
+	 */
+	public char getSeparator() {
+		return separator;
+	}
+
+	/**
+	 * @param separator the separator to set
+	 */
+	public void setSeparator(char separator) {
+		this.separator = separator;
+	}
+
+	/**
+	 * @return the quotechar
+	 */
+	public char getQuotechar() {
+		return quotechar;
+	}
+
+	/**
+	 * @param quotechar the quotechar to set
+	 */
+	public void setQuotechar(char quotechar) {
+		this.quotechar = quotechar;
+	}
+
+	/**
+	 * @return the escapechar
+	 */
+	public char getEscapechar() {
+		return escapechar;
+	}
+
+	/**
+	 * @param escapechar the escapechar to set
+	 */
+	public void setEscapechar(char escapechar) {
+		this.escapechar = escapechar;
+	}
+
+	/**
+	 * @return the lineEnd
+	 */
+	public String getLineEnd() {
+		return lineEnd;
+	}
+
+	/**
+	 * @param lineEnd the lineEnd to set
+	 */
+	public void setLineEnd(String lineEnd) {
+		this.lineEnd = lineEnd;
+	}
+	
 }
