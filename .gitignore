@@ -5,3 +5,5 @@
 .project
 
 *.prefs
+
+.settings
