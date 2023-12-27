@@ -1,9 +1,8 @@
 /target/
-
 .classpath
-
 .project
-
 *.prefs
-
 .settings
+.idea/
+
+
